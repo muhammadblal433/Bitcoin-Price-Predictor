@@ -1,0 +1,22 @@
+cat > .gitignore << 'EOF'
+# Virtual environments
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+
+# OS/editor
+.DS_Store
+.vscode/
+
+# Generated outputs
+BTC-USD.csv
+forecast_btcusd.csv
+btc_forecast.png
+Actual_vs_Predicted.png
+EOF

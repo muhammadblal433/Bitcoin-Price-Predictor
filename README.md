@@ -1,64 +1,77 @@
+# 📈 Bitcoin Price Predictor
+
+Welcome to the **Bitcoin Price Predictor** project!  
+This repository contains code to **fetch live Bitcoin data**, engineer features (lags + technical indicators), and train a machine learning model to forecast Bitcoin prices.  
+
+We use a **Random Forest Regressor** on lagged prices and technical indicators, then generate **future forecasts** by iteratively predicting daily returns and compounding them into prices. The project also automatically saves both a **forecast CSV** and a **visualization PNG**.
+
 ---
 
-# 📈 Bitcoin Price Prediction using Random Forest Regressor 🧠
+## Table of Contents
+- [Introduction](#introduction)  
+- [Features](#features)  
+- [Installation](#installation)  
+- [Usage](#usage)  
+- [Results](#results)  
+- [Notes](#notes)
 
-Welcome to the Bitcoin Price Prediction project! This repository contains code to load, preprocess, and train a machine learning model to predict Bitcoin closing prices. Using historical data, we employ a RandomForestRegressor to make predictions and evaluate the model's performance. Let's dive into the details! 🚀
+---
 
-## 🗂️ Table of Contents
-- [Introduction](#introduction)
-- [Dataset](#dataset)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Results](#results)
-- [Contributing](#contributing)
+## Introduction
+Predicting Bitcoin’s price is both fascinating and challenging due to its volatility.  
+This project demonstrates how to apply machine learning to **time-series forecasting** of Bitcoin, using:
+- Historical price data from [Yahoo Finance](https://finance.yahoo.com/quote/BTC-USD/).  
+- Technical indicators (moving averages, volatility, RSI, MACD, Bollinger Bands).  
+- Lagged features of previous daily closes.  
+- Random Forest for regression on returns.  
 
-## 🌟 Introduction
-Predicting Bitcoin prices is both a fascinating and challenging task. This project demonstrates how machine learning can be applied to forecast the closing prices of Bitcoin using historical data.
+The result is a model that can **forecast prices into the future (e.g., 2025/2026)** while saving outputs for analysis and visualization.
 
-## 📊 Dataset
-The dataset used in this project contains historical Bitcoin prices with the following columns:
-- Date
-- Open
-- High
-- Low
-- Close
-- Adj Close
-- Volume
+---
 
-## 🛠️ Installation
+## Features
+- **Automatic data download** using `yfinance` (no manual CSV needed).  
+- **Feature engineering**: lagged closes, SMA, EMA, RSI, MACD, Bollinger Bands, volatility.  
+- **Future forecasting**: iterative prediction of daily returns → compounded into future prices.  
+- **Visualization**: plot of historical vs test predictions vs forecast.  
+- **Outputs saved automatically**:  
+  - `forecast_btcusd.csv` → future predictions in CSV format.  
+  - `btc_forecast.png` → forecast plot image.  
+
+---
+
+## Installation
+
 1. Clone the repository:
    ```sh
-   git clone https://github.com/Armanx200/Bitcoin_Price_Prediction.git
-   ```
-2. Navigate to the project directory:
+   git clone https://github.com/muhammadblal433/Bitcoin-Price-Predictor.git
+   cd Bitcoin-Price-Predictor
+
+2. Create and activate a virtual environment (recommended):
    ```sh
-   cd Bitcoin_Price_Prediction
-   ```
-3. Install the required packages:
-   ```sh
+   python3 -m venv .venv
+   source .venv/bin/activate    # Mac/Linux
+   .venv\Scripts\activate       # Windows
+
+3. Install the required dependencies:
    pip install -r requirements.txt
-   ```
 
-## 🚀 Usage
-1. Ensure your dataset (`BTC-USD.csv`) is in the project directory.
-2. Run the script to train the model and make predictions:
-   ```sh
+## Usage
+
+1. Run the script:
    python BTC.py
-   ```
 
-## 📈 Results
-The model's performance is evaluated using Mean Squared Error (MSE) and Mean Absolute Error (MAE). Below is the accuracy of the model within a threshold of 2%:
+## The script will:
+- Fetch fresh Bitcoin price data from Yahoo Finance.
+- Train the Random Forest model on historical features.
+- Evaluate performance on recent data.
+- Generate a future forecast up to your chosen horizon (default: Dec 2026).
+- Save results to: forecast_btcusd.csv and btc_forecast.png
 
-**Accuracy: 99.36%**
+## Results:
+- Model evaluation is printed in the terminal (MSE, MAE, R² on returns).
+- Example forecast plot (your own will update with each run).
 
-### 📊 Actual vs Predicted Close Price Plot
-![Plot of Actual vs Predicted Close Price](https://github.com/Armanx200/Bitcoin_Price_Prediction/blob/main/Actual_vs_Predicted.png)
-
-## 🤝 Contributing
-Contributions are welcome! Please open an issue or submit a pull request if you have any suggestions or improvements.
-
----
-
-Made with ❤️ by [Arman Kianian](https://github.com/Armanx200)
-
----
+## Notes:
+- Forecasts are purely illustrative — this is a machine learning demo, not financial advice.
+- Accuracy decreases the further you forecast into the future due to compounding uncertainty.

@@ -56,6 +56,7 @@ The result is a model that can **forecast prices into the future (e.g., 2025/202
 3. Install the required dependencies:
    pip install -r requirements.txt
 
+
 ## Usage
 
 1. Run the script:
